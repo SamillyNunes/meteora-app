@@ -24,6 +24,25 @@ const Produtos = () => {
     }));
   }
 
+  const removeProduct = (productId) => {
+    const product = cart.find(c => c.id === productId);
+
+    if(!product) return;
+
+    if(product.quantidade>1){
+      return setCart((oldCart) => oldCart.map(item => {
+        if(item.id===productId){
+          item.quantidade-=1;
+        }
+        return item;
+      }));
+    }
+
+    const cartWithoutItem = cart.filter(p => p.id!==productId);
+    setCart(cartWithoutItem);
+
+  }
+
   return (
     <section role="produtos" aria-label="Produtos que estão bombando!">
       <Titulo>Produtos que estão bombando!</Titulo>
