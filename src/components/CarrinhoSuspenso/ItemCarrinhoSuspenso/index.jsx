@@ -2,13 +2,13 @@ import React from "react";
 import Quantidade from "@/components/Quantidade";
 import Botao from "@/components/Botao";
 import ValorFormatado from "@/components/ValorFormatado";
+import { useCartContext } from "@/hooks/useCartContext";
 
 const ItemCarrinhoSuspenso = ({
   itemCarrinho,
   removerProdutoCarrinho,
-  adicionarProduto,
-  removerProduto,
 }) => {
+  const { addProduct, removeProduct } = useCartContext();
   return (
     <li>
       <>
@@ -22,8 +22,8 @@ const ItemCarrinhoSuspenso = ({
             <p className="fw-semibold fs-5 m-0">{itemCarrinho.titulo}</p>
             <Quantidade
               itemCarrinho={itemCarrinho}
-              adicionarProduto={adicionarProduto}
-              removerProduto={removerProduto}
+              adicionarProduto={addProduct}
+              removerProduto={removeProduct}
             />
             <ValorFormatado valor={itemCarrinho.preco} />
           </div>

@@ -2,8 +2,11 @@ import React, { useContext } from "react";
 import Produto from "./Produto";
 import produtos from "@/mocks/produtos.json";
 import Titulo from "@/components/Titulo";
+import { useCartContext } from '../../hooks/useCartContext';
 
 const Produtos = () => {
+
+  const { addProduct } = useCartContext();
 
   return (
     <section role="produtos" aria-label="Produtos que estão bombando!">
