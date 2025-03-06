@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import Botao from "@/components/Botao";
 import ListaProdutosCarrinho from "@/components/ListaProdutosCarrinho";
 import TotalCarrinho from "./TotalCarrinho";
 import Titulo from "@/components/Titulo";
-import { CarrinhoContext } from "../../context/CarrinhoContext";
+import { useCartContext } from "../../hooks/useCartContext";
 
 const CarrinhoSuspenso = () => {
-  const {cart} = useContext(CarrinhoContext);
+  const {cart, total} = useCartContext();
 
   return (
     <div
@@ -34,7 +34,7 @@ const CarrinhoSuspenso = () => {
         <ListaProdutosCarrinho
           carrinho={cart}
         />
-        {/* <TotalCarrinho valorTotalCarrinho={valorTotalCarrinho} /> */}
+        <TotalCarrinho valorTotalCarrinho={total} />
       </div>
     </div>
   );
