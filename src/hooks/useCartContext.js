@@ -42,10 +42,17 @@ export const useCartContext = () => {
 
   }
 
+  const deleteCartProduct = (productId) => {
+    const products = cart.filter(item => item.id!==productId);
+
+    setCart(products);
+  }
+
   return {
     cart,
     setCart,
     addProduct,
     removeProduct,
+    deleteCartProduct,
   };
 }

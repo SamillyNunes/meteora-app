@@ -6,9 +6,8 @@ import { useCartContext } from "@/hooks/useCartContext";
 
 const ItemCarrinhoSuspenso = ({
   itemCarrinho,
-  removerProdutoCarrinho,
 }) => {
-  const { addProduct, removeProduct } = useCartContext();
+  const { addProduct, removeProduct, deleteCartProduct } = useCartContext();
   return (
     <li>
       <>
@@ -30,7 +29,7 @@ const ItemCarrinhoSuspenso = ({
           <Botao
             variant="deleteItem"
             aria-label="Excluir"
-            onClick={() => removerProdutoCarrinho(itemCarrinho.id)}
+            onClick={() => deleteCartProduct(itemCarrinho.id)}
           >
             delete_forever
           </Botao>
