@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import { CarrinhoContext } from "@/context/CarrinhoContext";
 
 // o fato do arquivo comecar com use, sinaliza para o react que isso sera hook customizado
@@ -48,10 +48,12 @@ export const useCartContext = () => {
     setCart(products);
   };
 
-  useEffect(() => {
-    // acumulator eh a var responsavel pelo valor reduzido em um, ou seja, o que esta acumulando
-    // o segundo parametro eh o valor inicial
-    const { totalTemp, quantityTemp } = cart.reduce(
+  // acumulator eh a var responsavel pelo valor reduzido em um, ou seja, o que esta acumulando
+  // o segundo parametro eh o valor inicial
+  // o uso do useMemo vai fazer com que ele guarde a informacao do calculo e mantenha ela ate
+  // que seja necessario calcular novamente
+  const { totalTemp, quantityTemp } = useMemo(() => {
+    return cart.reduce(
       (accumulator, product) => ({
         quantityTemp: accumulator.quantityTemp + product.quantidade,
         totalTemp: accumulator.totalTemp + product.preco * product.quantidade,
@@ -61,10 +63,12 @@ export const useCartContext = () => {
         totalTemp: 0,
       }
     );
+  }, [cart]);
 
+  useEffect(() => {
     setQuantity(quantityTemp);
     setTotal(totalTemp);
-  }, [cart]);
+  });
 
   return {
     cart,
